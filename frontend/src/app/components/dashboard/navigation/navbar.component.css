@@ -1,0 +1,168 @@
+.sidebar {
+	width: 280px;
+	padding: 18px;
+	/* Fixed to the left and take full viewport height */
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	z-index: 50;
+	/* Force the requested dark green */
+	background: #0B120F;
+	color: #ffffff;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	box-sizing: border-box;
+	border-right: none;
+	box-shadow: 0 6px 24px rgba(2,6,23,0.08);
+}
+
+.sidebar-header {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+}
+
+.burger {
+	display: none;
+	background: transparent;
+	border: none;
+	color: #ffffff;
+	padding: 6px;
+	margin-right: 6px;
+	border-radius: 6px;
+}
+.burger svg { display:block; }
+
+.avatar {
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	background: rgba(255,255,255,0.08);
+	color: #ffffff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 700;
+}
+
+.user-info {
+	display:flex;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 0;
+}
+.user-info .title {
+	font-weight: 700;
+	font-size: 15px;
+	color: #ffffff;
+}
+.user-info .subtitle {
+	font-size: 12px;
+	color: rgba(255,255,255,0.78);
+}
+.user-info .upgrade { margin-top:6px; }
+
+.upgrade {
+	margin-top: 6px;
+	background: transparent;
+	border: 1px solid rgba(255,255,255,0.12);
+	padding: 6px 8px;
+	border-radius: 6px;
+	font-size: 12px;
+	color: #ffffff;
+	transition: background-color 0.18s ease, color 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease;
+}
+.upgrade:hover, .upgrade:active {
+	background: #ffffff;
+	color: #0B120F;
+	box-shadow: 0 20px 40px rgba(11,18,15,0.28);
+	transform: translateY(-6px) scale(1.02);
+}
+
+.sidebar-nav ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.sidebar-nav li {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	padding: 8px 10px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.18s ease, color 0.18s ease, transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease;
+}
+
+.sidebar-nav li:hover, .sidebar-nav li:active {
+	/* On hover or click the item becomes white and lifts with a 3D shadow */
+	background: #ffffff;
+	color: #0B120F;
+	box-shadow: 0 18px 40px rgba(11,18,15,0.24);
+	transform: translateY(-6px) scale(1.02);
+}
+
+.icon svg { display: block; }
+.icon { width: 28px; height: 28px; display:flex; align-items:center; justify-content:center; color: inherit; }
+.icon svg { stroke: currentColor; }
+.label { font-size: 14px; color: inherit; }
+
+.section-title { font-size: 11px; color: #6b7280; font-weight: 600; }
+
+.dossier-card { background: #f9fafb; padding: 12px; border-radius: 8px; border: 1px solid rgba(15,23,42,0.03); }
+.dossier-action { margin-top:8px; padding:8px 10px; background:#fff; border:1px solid rgba(2,6,23,0.06); border-radius:6px; }
+
+.sidebar-footer { margin-top: auto; }
+.trash { background: transparent; border: none; color: #ffffff; display:flex; gap:8px; align-items:center; transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.18s ease, transform 0.12s ease; }
+.trash:hover, .trash:active { background: #ffffff; color: #0B120F; border-radius: 8px; padding: 6px 8px; box-shadow: 0 14px 36px rgba(11,18,15,0.22); transform: translateY(-4px); }
+
+/* Responsive: transform sidebar into a top nav on small screens */
+@media (max-width: 640px) {
+	.sidebar {
+		width: 100%;
+		height: 64px;
+		padding: 8px 12px;
+		flex-direction: row;
+		align-items: center;
+		gap: 12px;
+		transition: height 300ms ease, transform 300ms ease;
+	}
+
+	.burger { display: inline-flex; align-items:center; justify-content:center; }
+
+	/* hide nav items by default on mobile; show when mobile-open */
+	.sidebar .sidebar-nav { display: none; width:100%; }
+
+	.sidebar.mobile-open {
+		height: 100vh;
+		flex-direction: column;
+		align-items: flex-start;
+		padding-top: 18px;
+	}
+
+	.sidebar.mobile-open .sidebar-nav { display: block; order: 3; width: 100%; padding: 12px 18px; }
+	.sidebar.mobile-open .sidebar-nav ul { flex-direction: column; gap: 12px; }
+
+	.sidebar.mobile-open .sidebar-footer { display: block; width:100%; padding: 0 18px; }
+
+	/* backdrop when mobile menu is open */
+	.mobile-backdrop {
+		position: fixed;
+		inset: 0;
+		background: rgba(0,0,0,0.45);
+		z-index: 40;
+		transition: opacity 180ms ease;
+	}
+
+	.sidebar-header { order: 1; }
+	.sidebar-nav { order: 2; flex: 1; }
+	.sidebar-nav ul { flex-direction: row; gap: 6px; align-items:center; }
+	.sidebar-nav li { padding: 6px 8px; border-radius: 8px; }
+	.sidebar-footer { display: none; }
+}

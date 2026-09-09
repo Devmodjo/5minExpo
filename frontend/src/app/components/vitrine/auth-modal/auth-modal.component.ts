@@ -135,6 +135,7 @@ export class AuthModalComponent {
 
   public handleSocialLogin(provider: string): void {
 
+    // apres connexion, la redirection se faite automattiquement depuis le backend vers la page d'accueil de l'application
     if (provider == "google") {
       this.authService.googleAuthService();
     }
